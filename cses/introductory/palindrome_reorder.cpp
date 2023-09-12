@@ -15,19 +15,21 @@ int main(int argc, char const *argv[])
     cin >> in; // STRINGS a-z
 
     // generate array to count how many of each letter there is (initialized at 0 in c++)
-    int letters_count[25] = {};
-    int size = in.length();
+    ull letters_count[26] = {};
+    ull size = in.length();
     char solution[size]; // solution string
-    for (int i = 0; i < size; i++)
+    for (ull i = 0; i < size; i++)
     {
-        int index = in[i] - 'A';
+        ull index = in[i] - 'A';
         letters_count[index]++;
     }
+
+    // print array
     if (size % 2 == 0)
     {
-        int start = 0;
-        int end = size - 1;
-        for (int i = 0; i < 25; i++)
+        ull start = 0;
+        ull end = size - 1;
+        for (ull i = 0; i <= 25; i++)
         {
             // checking if its possible
             if (letters_count[i] % 2 != 0)
@@ -42,19 +44,19 @@ int main(int argc, char const *argv[])
                 solution[end] = 'A' + i;
                 start++;
                 end--;
-                letters_count[i]--; // decrease letters count
+                letters_count[i] -= 2; // decrease letters count
             }
         }
     }
     else
     {
         // size % 2 == 1
-        int mid = (size - 1) / 2;
-        int start = 0;
-        int end = size - 1;
-        int odd_letters = 0;
-        int odd_index = 0;
-        for (int i = 0; i < 25; i++)
+        ull mid = (size - 1) / 2;
+        ull start = 0;
+        ull end = size - 1;
+        ull odd_letters = 0;
+        ull odd_index = 0;
+        for (ull i = 0; i < 25; i++)
         {
             if (letters_count[i] % 2 == 1)
             {
@@ -70,7 +72,7 @@ int main(int argc, char const *argv[])
             return 0;
         }
         solution[mid] = 'A' + odd_index;
-        for (int i = 0; i < 25; i++)
+        for (ull i = 0; i <= 25; i++)
         {
 
             while (letters_count[i] > 1)
@@ -84,7 +86,7 @@ int main(int argc, char const *argv[])
             }
         }
     }
-    for (int i = 0; i < size; i++)
+    for (ull i = 0; i < size; i++)
     {
         cout << solution[i];
     }
