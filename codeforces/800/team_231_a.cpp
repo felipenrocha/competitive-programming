@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
 
-
 using namespace std;
-
-
 
 int main(int argc, char const *argv[])
 {
@@ -12,8 +9,7 @@ int main(int argc, char const *argv[])
     cout.tie(0);
     cin.tie(0);
 
-
-    int n, ans=0, total=0, x;
+    int n, ans = 0, total = 0, x;
     cin >> n;
 
     for (int i = 0; i < n; i++)
@@ -21,13 +17,12 @@ int main(int argc, char const *argv[])
         for (int i = 0; i < 3; i++)
         {
             cin >> x;
-            if(x == 1)
+            if (x == 1)
                 total++;
         }
-        if(total >= 2)
+        if (total >= 2)
             ans++;
         total = 0;
-        
     }
     cout << ans << '\n';
 

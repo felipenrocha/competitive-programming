@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 
-
 using namespace std;
-
 
 int main(int argc, char const *argv[])
 {
@@ -13,13 +11,14 @@ int main(int argc, char const *argv[])
 
     int w;
     cin >> w;
-    if(w > 2 && (w % 4 == 0 || (w-2) % 4 == 0)){
+    if (w > 2 && (w % 4 == 0 || (w - 2) % 4 == 0))
+    {
         cout << "YES";
     }
-    else{
-         cout << "NO";
+    else
+    {
+        cout << "NO";
     }
-        
 
     return 0;
 }
