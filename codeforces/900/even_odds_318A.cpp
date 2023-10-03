@@ -13,9 +13,7 @@ int main(int argc, char const *argv[])
 
     ios_base::sync_with_stdio(false);
     cout.tie(0);
-    cin.tie(0);
-
-    // 10
+    
     int64_t n, k, total_elements = 1;
     cin >> n >> k;
     int64_t mid = n / 2; // get separation from odd to even
