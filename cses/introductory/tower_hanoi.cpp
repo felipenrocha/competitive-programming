@@ -8,7 +8,6 @@ using namespace std;
 typedef unsigned long long int ull;
 void hanoi(int n, int src, int dest, int tmp);
 
-void findMove(stack<int> &left, stack<int> &middle, stack<int> &right);
 int main(int argc, char const *argv[])
 {
 
