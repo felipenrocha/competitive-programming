@@ -54,40 +54,22 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-// 118A
-
 void solve()
 {
-    string s;
-    vector<char> ans;
-    cin >> s;
-
-    // replace all upper for lower
-
-    for (int i = 0; i < s.size(); i++)
+    int n;
+    ll x = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++)
     {
-        if (isupper(s[i]))
-        {
-            s[i] = tolower(s[i]);
-        }
-    }
-    for (int i = 0; i < s.size(); i++)
-    {
-        if (s[i] == 'y' || s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
-        {
-            // do nothing
-        }
+        string op;
+        cin >> op;
+
+        if (op.find('+') != std::string::npos)
+            x++;
         else
-        {
-            ans.push_back('.');
-            ans.push_back(s[i]);
-        }
+            x--;
     }
-    for (int i = 0; i < ans.size(); i++)
-    {
-        cout << ans[i];
-    }
-    cout << "\n";
+    cout << x << "\n";
 }
 int main()
 {
@@ -96,6 +78,6 @@ int main()
     // cin >> t;
     // for(int it=1;it<=t;it++) {
     solve();
-    // }
+    //}
     return 0;
 }

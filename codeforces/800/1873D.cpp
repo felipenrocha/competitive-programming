@@ -53,49 +53,36 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-
-// 118A
-
+//1873D
 void solve()
 {
+    int n, k;
+    cin >> n >> k;
     string s;
-    vector<char> ans;
+    ll ans = 0;
     cin >> s;
-
-    // replace all upper for lower
-
-    for (int i = 0; i < s.size(); i++)
+    for (int i = 0; i < n; i++)
     {
-        if (isupper(s[i]))
+        if (s[i] == 'W')
         {
-            s[i] = tolower(s[i]);
+            continue;
+        }
+        if (s[i] == 'B')
+        {
+            ans++;
+            i += k - 1;
         }
     }
-    for (int i = 0; i < s.size(); i++)
-    {
-        if (s[i] == 'y' || s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
-        {
-            // do nothing
-        }
-        else
-        {
-            ans.push_back('.');
-            ans.push_back(s[i]);
-        }
-    }
-    for (int i = 0; i < ans.size(); i++)
-    {
-        cout << ans[i];
-    }
-    cout << "\n";
+    cout << ans << "\n";
 }
 int main()
 {
     fast_cin();
-    // ll t;
-    // cin >> t;
-    // for(int it=1;it<=t;it++) {
-    solve();
-    // }
+    ll t;
+    cin >> t;
+    for (int it = 1; it <= t; it++)
+    {
+        solve();
+    }
     return 0;
 }
