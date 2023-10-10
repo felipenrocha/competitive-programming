@@ -53,26 +53,25 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-//266B - Queue at the school
+//977A
 void solve()
 {
-    int n, t;
-    cin >> n >> t;
-    string s;
-    cin >> s;
+    ll n;
+    int k;
+    cin >> n >> k;
 
-    for (int i = 0; i < t; i++)
+    for (int i = 0; i < k; i++)
     {
-        for (int j = 0; j < n - 1; j++)
+        if (n % 10 != 0) // if the last digit of the number is non-zero, she decreases the number by one;
         {
-            if (s[j] == 'B' && s[j + 1] == 'G')
-            {
-                swap(s[j], s[j + 1]);
-                j++;
-            }
+            n--;
+        }
+        else
+        {
+            n = n / 10;
         }
     }
-    cout << s << "\n";
+    cout << n << "\n";
 }
 int main()
 {

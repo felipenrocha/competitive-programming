@@ -53,26 +53,32 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-//266B - Queue at the school
+
+//734A
 void solve()
 {
-    int n, t;
-    cin >> n >> t;
+    int n;
+    cin >> n;
     string s;
     cin >> s;
-
-    for (int i = 0; i < t; i++)
+    sort(s.begin(), s.end());
+    int a_won = upper_bound(s.begin(), s.end(), 'A') - s.begin();
+    int d_won = s.size() - a_won;
+    if (a_won > d_won)
     {
-        for (int j = 0; j < n - 1; j++)
-        {
-            if (s[j] == 'B' && s[j + 1] == 'G')
-            {
-                swap(s[j], s[j + 1]);
-                j++;
-            }
-        }
+        cout << "Anton"
+             << "\n";
+        return;
     }
-    cout << s << "\n";
+    if (a_won < d_won)
+    {
+        cout << "Danik"
+             << "\n";
+        return;
+    }
+    cout << "Friendship"
+         << "\n";
+
 }
 int main()
 {

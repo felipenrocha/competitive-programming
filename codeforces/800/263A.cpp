@@ -53,30 +53,57 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-//266B - Queue at the school
+
 void solve()
 {
-    int n, t;
-    cin >> n >> t;
-    string s;
-    cin >> s;
-
-    for (int i = 0; i < t; i++)
+    int v[5][5] = {};
+    int k, l, moves = 0;
+    for (int i = 0; i < 5; i++)
     {
-        for (int j = 0; j < n - 1; j++)
+        for (int j = 0; j < 5; j++)
         {
-            if (s[j] == 'B' && s[j + 1] == 'G')
+            int a;
+            cin >> a;
+            if (a == 1)
             {
-                swap(s[j], s[j + 1]);
-                j++;
+                k = i;
+                l = j;
             }
+            v[i][j] = a;
         }
     }
-    cout << s << "\n";
+
+    while (k != 2)
+    {
+        if (k > 2)
+        {
+            k--;
+        }
+        else
+        {
+            k++;
+        }
+        moves++;
+    }
+    while (l != 2)
+    {
+        if (l > 2)
+        {
+            l--;
+        }
+        else
+        {
+            l++;
+        }
+        moves++;
+    }
+    cout << moves << "\n";
 }
 int main()
 {
     fast_cin();
+
     solve();
+
     return 0;
 }

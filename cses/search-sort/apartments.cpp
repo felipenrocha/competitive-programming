@@ -53,30 +53,48 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-//266B - Queue at the school
+#define SOLD 1
+#define NOT_SOLD 0
 void solve()
 {
-    int n, t;
-    cin >> n >> t;
-    string s;
-    cin >> s;
+    ll n, m, k;
+    cin >> n >> m >> k;
+    vector<ll> a,b;
 
-    for (int i = 0; i < t; i++)
+    //vector<pair<ll, int>> b;
+    for (ll i = 0; i < n; i++)
     {
-        for (int j = 0; j < n - 1; j++)
+        ll ai;
+        cin >> ai;
+        a.push_back(ai);
+    }
+    for (ll i = 0; i < m; i++)
+    {
+        ll bi;
+        cin >> bi;
+        b.push_back(bi);
+    }
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    ll ans = 0;
+    for (long unsigned int i = 0; i < a.size(); i++)
+    {
+
+        // find lower bound for j using key a[i]+k and a[i-k]
+        int position =  lower_bound(b.begin(), b.end(), a[i] - k) - b.begin();
+        if (b[position] >= a[i] - k && b[position] <= a[i] + k)
         {
-            if (s[j] == 'B' && s[j + 1] == 'G')
-            {
-                swap(s[j], s[j + 1]);
-                j++;
-            }
+            b.erase(b.begin() + position);
+            ans++;
         }
     }
-    cout << s << "\n";
+
+    cout << ans << "\n";
 }
 int main()
 {
+
     fast_cin();
     solve();
     return 0;
-}
+} 
