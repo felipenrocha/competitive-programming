@@ -56,41 +56,35 @@ double eps = 1e-12;
 
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
+    int N, M, l, r, a, ans = 0;
+    cin >> N >> M;
+    vector<int> censitarios(N), operacoes(N, 0);
+    for (int i = 0; i < N; i++)
     {
-        cin >> aux;
-        a.pb(aux);
+        cin >> censitarios[i];
     }
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < M; i++)
     {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
+        cin >> l >> r >> a;
+        l--;
+        for (int i = l; i < r; i++)
         {
-            break;
+            censitarios[i] -= a;
+            operacoes[i]++;
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
     }
-    cout << fans << "\n";
+    for (int i = 0; i < N; i++)
+    {
+        if (censitarios[i] > 0)
+        {
+            ans += operacoes[i];
+        }
+    }
+    cout << ans << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

@@ -53,44 +53,42 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+#define USED 1
+#define UNUSED 0
 
+// TODO: solve this shit
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
+    int n;
+    cin >> n;
+    vector<pair<int, int>> a;
+    vector<int> b;
 
     for (int i = 0; i < n; i++)
     {
-        if (k == i)
+        int ai;
+        cin >> ai;
+        a.push_back({ai, UNUSED});
+        b.push_back(ai);
+    }
+    ll ans = 0;
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    int index = 0;
+    for (int k = 1; k < a.size() + 1; k++)
+    {
+        int index = lower_bound(b.begin(), b.end(), k) - b.begin();
+        if (a[index].second == UNUSED)
         {
-            break;
+            ans++;
+            a[index].second = USED;
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
     }
-    cout << fans << "\n";
+    cout << ans << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

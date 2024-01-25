@@ -53,44 +53,58 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-
-void solve()
+bool check_repeats(vector<int> digits)
 {
 
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < digits.size(); i++)
     {
-        cin >> aux;
-        a.pb(aux);
+        if (digits[i] > 1)
+        {
+            return true;
+        }
     }
-    for (int i = 0; i < n; i++)
+    return false;
+}
+vector<int> count_numbers(string s)
+{
+    vector<int> digits(10, 0);
+    for (int i = 0; i < s.size(); i++)
     {
-        cin >> aux;
-        b.pb(aux);
+        digits[(s[i] - '0')]++;
+    }
+    return digits;
+}
+void solve()
+{
+    string s;
+    cin >> s;
+    int a = stoi(s);
+    a++;
+    s = to_string(a);
+    vector<int> digits(10, 0);
+    int i = 0;
+    while (1)
+    {
+        digits = count_numbers(s);
+
+        if (check_repeats(digits))
+        {
+            int a = stoi(s);
+            a++;
+            s = to_string(a);
+        }
+        else
+        {
+            cout << s << "\n";
+            return;
+        }
     }
 
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
-        {
-            break;
-        }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
-    }
-    cout << fans << "\n";
+    // cout << s << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

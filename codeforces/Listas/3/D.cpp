@@ -56,41 +56,43 @@ double eps = 1e-12;
 
 void solve()
 {
+    int n, e;
+    cin >> n;
+    vector<int> v1, v2, diff;
+    for (int i = 0; i < n; i++) // O(n)+
+    {
+        cin >> e;
+        v1.push_back(e);
+    }
+    n--;
+    for (int i = 0; i < n; i++) // O(n)+
+    {
+        cin >> e;
+        v2.push_back(e);
+    }
+    sort(v1.begin(), v1.end()); // O( n log n)+
+    sort(v2.begin(), v2.end()); // O( n log n)+
+    set_difference(v1.begin(), v1.end(), v2.begin(), v2.end(),
+                   inserter(diff, diff.begin())); // find difference between 2 vectors (dont know the complexity)
+    cout << diff[0] << "\n";
 
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
+    v1 = v2;
+    v2.clear();
+    n--;
+    for (int i = 0; i < n; i++) // O(n)+
     {
-        cin >> aux;
-        a.pb(aux);
+        cin >> e;
+        v2.push_back(e);
     }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
-        {
-            break;
-        }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
-    }
-    cout << fans << "\n";
+    sort(v1.begin(), v1.end()); // O( n log n)
+    sort(v2.begin(), v2.end()); // O( n log n)+
+    set_difference(v1.begin(), v1.end(), v2.begin(), v2.end(),
+                   inserter(diff, diff.begin()));
+    cout << diff[0] << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

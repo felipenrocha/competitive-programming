@@ -54,34 +54,35 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+// advantage 1760c
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
+    int n, s, max1, max2;
+    vector<signed int> fila;
+    priority_queue<signed int> max_elements;
+    cin >> n;
     for (int i = 0; i < n; i++)
     {
-        cin >> aux;
-        a.pb(aux);
+        cin >> s;
+        fila.push_back(s);
+        max_elements.push(s);
     }
+    max1 = max_elements.top();
+    max_elements.pop();
+    max2 = max_elements.top();
+    max_elements.pop();
     for (int i = 0; i < n; i++)
     {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
+        if (fila[i] == max1)
         {
-            break;
+            cout << max1 - max2 << " ";
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
+        else
+        {
+            cout << fila[i] - max1 << " ";
+        }
     }
-    cout << fans << "\n";
+    cout << "\n";
 }
 int main()
 {

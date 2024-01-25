@@ -56,41 +56,58 @@ double eps = 1e-12;
 
 void solve()
 {
+    vector<pair<int, int>> estoque; // id numero, quantidade no estoque
 
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
+    int q, t, m, flag = 0;
+    cin >> q;
+    for (int i = 0; i < q; i++)
     {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
+        flag = 0;
+        cin >> t >> m;
+        if (t == 1)
         {
-            break;
+            // push element in estoque
+            // se nao existir, crie e adicione com 0 elementos
+            for (int j = 0; j < estoque.size(); j++) // O(n)
+            {
+                if (estoque[j].first == m)
+                {
+                    // elemento ja existe
+                    estoque[j].second++; // adiciona 1 elemento ao estoque
+                    flag = 1;
+                }
+            }
+            if (!flag) // item nao existe
+            {
+                estoque.push_back(mp(m, 1));
+            }
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
+        else
+        {
+            for (int j = 0; j < estoque.size(); j++) // O(n)
+            {
+                if (estoque[j].first == m)
+                {
+                    // elemento existe
+                    flag = 1;
+                }
+            }
+            if (!flag) // item nao existe
+            {
+                cout << "Nao"
+                     << "\n";
+            }
+            else
+            {
+                cout << "Sim"
+                     << "\n";
+            }
+        }
     }
-    cout << fans << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

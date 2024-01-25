@@ -54,43 +54,33 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+// prefix sum
 void solve()
 {
+    int n, q, l, r, x;
+    cin >> n >> q;
+    ll a;
+    vector<ll> V(n, 0);
 
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < q; i++)
     {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
+        cin >> l >> r >> x;
+        l--;
+        //r--;
+        for (int i = l; i < r; i++)
         {
-            break;
+            V[i] += x;
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
     }
-    cout << fans << "\n";
+    for (int i = 0; i < n; i++)
+    {
+        cout << V[i] << " ";
+    }
+    cout << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

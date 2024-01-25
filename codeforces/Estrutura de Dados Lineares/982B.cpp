@@ -53,44 +53,80 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+typedef tuple<int, int, int> tiii;
 
+class cmpi
+{
+public:
+    // a eh o proximo, b eh o atual
+    bool operator()(tiii &a, tiii &b)
+    {
+        int x, y, z, r, s, t;
+        tie(x, y, z) = a;
+        tie(r, s, t) = b;
+
+        if (x == r)
+           return y > s;
+        else
+            return x < r;
+    }
+}; 
+
+class cmpe
+{
+public:
+    bool operator()(tiii &a, tiii &b)
+    {
+        int x, y, z, r, s, t;
+        tie(x, y, z) = a;
+        tie(r, s, t) = b;
+
+        if (x == r)
+            return y < s;
+        else
+            return x > r;
+    }
+};
+// 982B - Priority Queue Data Type  Class
 void solve()
 {
 
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
+    int n, num, w, row;
+    priority_queue<tiii, vector<tiii>, cmpi> introvertidos;
+    priority_queue<tiii, vector<tiii>, cmpe> extrovertidos;
+    cin >> n;
 
     for (int i = 0; i < n; i++)
     {
-        if (k == i)
-        {
-            break;
-        }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
+        cin >> w;
+        introvertidos.push({2, w, i + 1});
+        extrovertidos.push({2, w, i + 1});
     }
-    cout << fans << "\n";
+    string c;
+    cin >> c;
+    for (int i = 0; i < c.size(); i++)
+    {
+        if (c[i] == '0')
+        {
+            tie(num, w, row) = introvertidos.top();
+            introvertidos.pop();
+        }
+        else
+        {
+            tie(num, w, row) = extrovertidos.top();
+            extrovertidos.pop();
+        }
+        cout << row << " ";
+        if (num == 2)
+        {
+            introvertidos.push({num - 1, w, row});
+            extrovertidos.push({num - 1, w, row});
+        }
+    }
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

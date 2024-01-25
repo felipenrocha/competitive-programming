@@ -53,24 +53,35 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-//266B - Queue at the school
+bool check_repeats(vector<int> digits)
+{
+    for (int i = 0; i < digits.size(); i++)
+    {
+        if (digits[i] > 1)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 void solve()
 {
-    int n, t;
-    cin >> n >> t;
     string s;
     cin >> s;
-
-    for (int i = 0; i < t; i++)
+    vector<int> digits(9, 0);
+    int i = 0;
+    while (i < 2)
     {
-        for (int j = 0; j < n - 1; j++)
+        for (int i = 0; i < s.size(); i++)
         {
-            if (s[j] == 'B' && s[j + 1] == 'G')
-            {
-                swap(s[j], s[j + 1]);
-                j++;
-            }
+            digits[(s[i] - '0') - 1];
+            cout << " digits[(s[i] - '0') - 1]" << digits[(s[i] - '0') - 1] << "\n";
+            int a = stoi(s);
+            a++;
+            s = to_string(a);
         }
+        fill(digits.begin(), digits.end(), 0);
+        i++;
     }
     cout << s << "\n";
 }

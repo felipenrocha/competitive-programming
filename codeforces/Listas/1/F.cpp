@@ -53,44 +53,45 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+bool check_digits(int n, int a, int b)
+{
 
+    // transform into string and push digits -> sum digits -> check if its bigger than a and smaller than b
+    string s = to_string(n);
+    vector<int> digits;
+    for (int i = 0; i < s.size(); i++)
+    {
+        digits.push_back(s[i] - '0');
+    }
+    ll sum = 0;
+    for (int i = 0; i < digits.size(); i++)
+    {
+        sum += digits[i];
+    }
+    if (sum >= a && sum <= b)
+    {
+        return true;
+    }
+    return false;
+}
 void solve()
 {
 
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
+    int n, a, b;
+    ll ans = 0;
+    cin >> n >> a >> b;
+    for (int i = 1; i <= n; i++)
     {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
+        if (check_digits(i, a, b))
         {
-            break;
+            ans += i;
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
     }
-    cout << fans << "\n";
+    cout << ans << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

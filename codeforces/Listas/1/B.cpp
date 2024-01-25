@@ -56,41 +56,26 @@ double eps = 1e-12;
 
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
+    int n;
+    vector<ll> a;
+    cin >> n;
     for (int i = 0; i < n; i++)
     {
-        cin >> aux;
-        a.pb(aux);
+        ll ai;
+        cin >> ai;
+        a.push_back(ai);
     }
-    for (int i = 0; i < n; i++)
+    sort(a.begin(), a.end());
+    ll ans = 0;
+    for (int i = 0; i < n - 1; i++)
     {
-        cin >> aux;
-        b.pb(aux);
+        ans += a[n - 1] - a[i];
     }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
-        {
-            break;
-        }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
-    }
-    cout << fans << "\n";
+    cout << ans  << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

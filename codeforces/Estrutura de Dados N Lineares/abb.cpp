@@ -53,44 +53,38 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
-
+// arvore binaria
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
+    int n, q, aux;
+    cin >> n >> q;
+    set<int> conj; // conjunto matematico (sem repeticoes)
 
     for (int i = 0; i < n; i++)
     {
-        if (k == i)
-        {
-            break;
-        }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
+        cin >> aux;
+        conj.insert(aux); // insert O(log n);
     }
-    cout << fans << "\n";
+    while (q--)
+    {
+        cin >> aux;
+        if (conj.count(aux)) // Consulta: O(log n )
+            cout << "Element in set"
+                 << "\n";
+        else
+            cout << "Element not in set"
+                 << "\n";
+    }
+    cout << "Tamanho do Conjunto: " << conj.size() << "\n"; // O(1)
+    cin >> aux;
+    conj.erase(aux); //Remoção O(log n)
+    cout << "Tamanho do Conjunto: " << conj.size() << "\n"; // O(1)
+    
+
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

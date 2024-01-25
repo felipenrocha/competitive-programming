@@ -1,0 +1,16 @@
+1.                               F   (~p->(q^~r))    ->         (p->(~q->r))
+                                            V (~p->(q^~r)) (feita)
+                                            F (p->(~q->r)) (feita)
+                                            V p
+                                            F (~q->r) (feita)
+                                            V ~q
+                                            F r
+                                            F q
+
+
+                            F  ~p                   V   (q^~r)
+                            V  p                        V q
+                                                        F r
+
+                                                        Fechado
+                      Aberto  

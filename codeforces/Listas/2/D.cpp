@@ -53,44 +53,63 @@ double eps = 1e-12;
     cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
+typedef tuple<int, int, int> tiii;
+
+class cmpcaixas // comapre caixas priority queue
+{
+public:
+    // a eh o proximo, b eh o atual
+    bool operator()(tiii &a, tiii &b)
+    {
+        int x, y, z, r, s, t;
+        tie(x, y, z) = a;
+        tie(r, s, t) = b;
+        // se acaberem na mesma hora
+        if (x == r)
+            return y > s; // retorna menor id
+        else
+            return x > r; // retorna menor time_to_finish
+    }
+};
 
 void solve()
 {
+    int n, m, c, v, id, time_to_finish = 0;
+    cin >> n >> m;
+    queue<int> clientes;
+    priority_queue<tiii, vector<tiii>, cmpcaixas> caixas;
+    int total_time = 0;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> v;
+        caixas.push({time_to_finish, i + 1, v}); // time_to_finish, id, velocidade
+    }
+    for (int i = 0; i < m; i++)
+    {
+        cin >> c;
+        clientes.emplace(c);
+    }
+    while (!clientes.empty())
+    {
+        c = clientes.front();
+        clientes.pop();
+        // achar proximo caixa para cliente:
+        tie(time_to_finish, id, v) = caixas.top();
+        caixas.pop();
+        time_to_finish += (v * c);
+        caixas.push({time_to_finish, id, v});
+    }
+    while (!caixas.empty())
+    {
+        tie(time_to_finish, id, v) = caixas.top();
+        caixas.pop();
+    }
 
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
-        {
-            break;
-        }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
-    }
-    cout << fans << "\n";
+    cout << time_to_finish << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

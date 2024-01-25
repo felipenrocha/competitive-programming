@@ -56,27 +56,17 @@ double eps = 1e-12;
 
 void solve()
 {
-    ll a, b;
-    cin >> a >> b;
-    if (a == 0)
-    {
-        cout << 1
-             << "\n";
-        return;
-    }
-    else
-    {
-        cout << a + b * 2 + 1 << "\n";
-    }
+    ll n, g, f, c;
+    cin >> n >> g >> f >> c;
+    ll ans = 0;
+    ans = min(g, f) + c;
+    ans = min(ans, n);
+    cout
+        << ans << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

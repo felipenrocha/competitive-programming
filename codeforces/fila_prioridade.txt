@@ -1,0 +1,16 @@
+Adotar um critério de posicionamento dos elementos na fila.
+
+Não é necessariamente FIFO;
+
+Ex.: Fila de prioridade por valor máximo (decererscente)
+
+
+
+Lista Vazia - [];
+Adiciona 2 -> [2];
+Adiciona 0 - > [2,0]
+Adiciona -1 -> [2,0,-1]   (Loop para saber onde adicionar o próximo elemento)
+
+Adiciona 1 -> Passa por 2 (2>1? sim, continua), (0>1? nao, para e adiciona 1 entre 2 e 0):
+
+[2,1,0,-1]

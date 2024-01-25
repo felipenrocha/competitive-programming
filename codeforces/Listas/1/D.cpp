@@ -54,43 +54,41 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+// shitty solution
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
+    int n;
+    cin >> n;
+    vector<pair<string, int>> v;
+    vector<string> v2;
 
     for (int i = 0; i < n; i++)
     {
-        if (k == i)
+        string s;
+        cin >> s;
+        v.push_back({s, 0});
+        v2.push_back(s);
+    }
+    sort(v2.begin(), v2.end());
+    for (int i = 0; i < v.size(); i++)
+    {
+        for (int j = 0; j < v2.size(); j++)
         {
-            break;
+            if (v[i].first == v2[j])
+            {
+                v[i].second = j;
+            }
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
     }
-    cout << fans << "\n";
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i].second << " ";
+    }
+    cout << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

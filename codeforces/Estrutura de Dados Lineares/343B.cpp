@@ -56,41 +56,31 @@ double eps = 1e-12;
 
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
+    stack<char> wires;
+    string n;
+    cin >> n;
+    if (n.size() == 1)
     {
-        cin >> aux;
-        a.pb(aux);
+        cout << "No"
+             << "\n";
+        return;
     }
-    for (int i = 0; i < n; i++)
+    if (n.size() == 2)
     {
-        cin >> aux;
-        b.pb(aux);
+        if (n[0] == n[1])
+            cout << "Yes";
+        else
+            cout << "No";
+        return;
     }
-
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i < n.size(); i++)
     {
-        if (k == i)
-        {
-            break;
-        }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
+        wires.push(n[i]);
     }
-    cout << fans << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

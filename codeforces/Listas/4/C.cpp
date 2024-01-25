@@ -56,41 +56,31 @@ double eps = 1e-12;
 
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
+    int n, q, t, l, r;
+    ll x, ans = 0;
+    cin >> n >> q >> t;
+    vector<ll> terreno(n, 0);
+    for (int i = 0; i < q; i++)
     {
-        cin >> aux;
-        a.pb(aux);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
+        cin >> l >> r >> x;
+        l--;
+        for (int i = l; i < r; i++)
         {
-            break;
+            terreno[i] += x;
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
     }
-    cout << fans << "\n";
+    for (int i = 0; i < n; i++)
+    {
+        if (terreno[i] >= t)
+        {
+            ans++;
+        }
+    }
+    cout << ans << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

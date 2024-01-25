@@ -54,43 +54,50 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+#define LIVRE 1
+#define OCUPADO 0
+
 void solve()
 {
+    int n, id, ti, pi, ri;
+    cin >> n;
+    priority_queue<tuple<int, int, int, int>> clientes; // id, ti, pi,ri
+    for (int i = 1; i < n + 1; i++)
+    {
+        int ti, pi, ri;
+        vector<int> cliente;
+        cin >> ti >> pi >> ri;
 
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> aux;
-        a.pb(aux);
+        clientes.emplace(make_tuple(i, ti, pi, ri));
     }
-    for (int i = 0; i < n; i++)
+    int time = 0;
+    int time_finished = 0;
+    while (!clientes.empty())
     {
-        cin >> aux;
-        b.pb(aux);
-    }
 
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
+        tie(id, ti, pi, ri) = clientes.top();
+        clientes.pop();
+
+        if (time_finished <= pi)
         {
-            break;
+            // cliente atendido:
+            time += ti; // tempo gasto no atendimento]
+            time_finished = ti;
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
+        else
+        {
+            // time += pi;
+            // cliente atendido:
+            pi += ri; // paciencia "reseta" dps de ri minutos
+            clientes.emplace(make_tuple(id, ti, pi, ri));
+        }
+        // falta caso onde o operador espera alguem voltar;
     }
-    cout << fans << "\n";
+    cout << time << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

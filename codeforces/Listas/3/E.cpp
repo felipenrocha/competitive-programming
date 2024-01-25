@@ -56,41 +56,34 @@ double eps = 1e-12;
 
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
+    priority_queue<int> a;
+    priority_queue<int, vector<int>, greater<int>> b;
+    vector<int> a_soma, b_soma;
+    int n, k1, k2, c, ans = 0;
+    cin >> n >> k1 >> k2;
     for (int i = 0; i < n; i++)
     {
-        cin >> aux;
-        a.pb(aux);
+        cin >> c;
+        a.push(c);
+        a_soma.push_back(c);
     }
     for (int i = 0; i < n; i++)
     {
-        cin >> aux;
-        b.pb(aux);
+        cin >> c;
+        b.push(c);
+        b_soma.push_back(c);
     }
-
+  
     for (int i = 0; i < n; i++)
     {
-        if (k == i)
-        {
-            break;
-        }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
+        ans += (a_soma[i] - b_soma[i]) * (a_soma[i] - b_soma[i]);
     }
-    cout << fans << "\n";
+    cout << ans <<
 }
+
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

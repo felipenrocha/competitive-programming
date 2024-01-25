@@ -56,41 +56,50 @@ double eps = 1e-12;
 
 void solve()
 {
-
-    int n, k, aux, ans = 0, fans = 0, bmax = 0;
-    cin >> n >> k;
-    vector<int> a, b;
+    int n, f, p;
+    cin >> n >> f >> p;
+    ll ans = 0;
+    queue<int> veiculos;
     for (int i = 0; i < n; i++)
     {
-        cin >> aux;
-        a.pb(aux);
+        int ai;
+        cin >> ai;
+        veiculos.emplace(ai);
     }
-    for (int i = 0; i < n; i++)
+    int i = 0;
+    while (!veiculos.empty())
     {
-        cin >> aux;
-        b.pb(aux);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (k == i)
+        if (i == 0 || i % f == 0)
         {
-            break;
+            //  veiculo inspecionado:
+            int peso = veiculos.front();
+            veiculos.pop(); // retira carro da fila
+            if (peso <= p)
+            {
+                // peso livre -> + 5 segundos
+                ans += 5;
+            }
+            else
+            {
+                // peso acima -> retira dois e vai para o final da fila
+                veiculos.emplace(peso - 2);
+                ans += 10; // +10s
+            }
         }
-        ans += a[i];
-        bmax = max(bmax, b[i]);
-        fans = max(ans + (k - i - 1) * bmax, fans);
+        else
+        {
+            // veiculo nao inspecionado
+            veiculos.pop(); // retira carro da fila
+            ans++;          // ti = 1
+        }
+
+        i++;
     }
-    cout << fans << "\n";
+    cout << ans << "\n";
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }
